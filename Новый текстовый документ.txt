@@ -1,0 +1,5 @@
+C:\Users\DarKi\source\repos\IntravisionTestTask-master
+ - dotnet run
+
+C:\Users\DarKi\OneDrive\Рабочий стол\vending_machine
+ - npm start

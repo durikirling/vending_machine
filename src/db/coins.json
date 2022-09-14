@@ -1,0 +1,22 @@
+[ 
+    {   
+      "coinPar": 1, 
+      "coinCount": 5, 
+      "coinMaxCount": 10
+    },
+    {
+      "coinPar": 2,
+      "coinCount": 10,
+      "coinMaxCount": 10
+    },
+    {
+      "coinPar": 5,
+      "coinCount": 0,
+      "coinMaxCount": 10
+    },
+    {
+      "coinPar": 10,
+      "coinCount": 8,
+      "coinMaxCount": 10
+    }
+  ]
