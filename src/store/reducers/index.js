@@ -4,13 +4,17 @@ import products from './products.js'
 import sum from './sum.js'
 import purchase from './purchase.js'
 import basket from './basket.js'
+import productFilter from './productFilter.js'
+import coinFilter from './coinFilter.js'
 
 const rootReducer = combineReducers({ 
     coins,
     products,
     sum,
     purchase,
-    basket
+    basket,
+    productFilter,
+    coinFilter
 });
 
 export default rootReducer;

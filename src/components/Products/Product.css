@@ -1,0 +1,121 @@
+.allSoda {
+    /* background-image: url(https://steamuserimages-a.akamaihd.net/ugc/779604908382918163/B12F1FFF8F2C65D5C861FFFB6FBCBB81F23DA3D8/); */
+    /* background-image: url(https://catherineasquithgallery.com/uploads/posts/2021-02/1613704958_58-p-kosmicheskii-fon-dlya-prezentatsii-67.jpg); */
+    /* background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; */
+    /* border: 3px solid white; */
+    position: absolute;
+    overflow: auto; 
+    padding: 10px;
+    width: 60%;
+    /* height: 400px; */
+    left: 5%;
+    top: 100px;
+    bottom: 10%;
+    background-color: hsl(220, 6%, 19%);
+    opacity: 90%;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    border-radius: 10px;
+    box-shadow: inset 0 0 50px 1px black;
+  }
+  
+  
+  .allSoda:hover {
+    opacity: 100%;
+  }
+  
+  .soda {
+    border: 0px solid black;
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 1px black;
+    background-color: rgb(10, 10, 10);
+    transition-property: background-color, opacity, width, height, margin, box-shadow, font-size;
+    transition-duration: 0.3s;
+    /* transition-property: width,height,margin;
+    transition-duration: 0.3s; */
+    vertical-align: middle;
+    position: relative;
+    
+  }
+  
+  .soda:hover {
+    /* width: 300px;
+    height: 300px; */
+    width: 270px;
+    height: 268px;
+    margin: 0px;
+    font-size: 18px;
+  }
+  
+  .user .soda:hover {
+    box-shadow: 0 0 10px 1px white;
+  }
+  
+  .soda.cant-take-soda {
+    opacity: 0.4;
+  }
+  
+  .soda.cant-take-soda:hover {
+    box-shadow: none;
+  }
+  
+  /* .admin .soda.cant-take-soda{
+    animation: spark 2000ms infinite;
+  } */
+  
+  img{
+    padding: 10px;
+    height: 50%;
+    /* box-shadow: 0 0 15px red; */
+  }
+  
+  .createSoda {
+    position: absolute;
+    font-size: 150px;
+    /* max-height: 250px; */
+    /* background-color: brown; */
+    /* top: 42.5%; */
+    top: calc(50% - 20px);
+    left: 50%;
+    /* margin-right: -50%; */
+    transform: translate(-50%, -50%);
+  }
+
+  .plus {
+    display:inline-block;
+    /* margin-left: 20px; */
+    padding: 11px;
+    /* width:20px;
+    height:20px; */
+    background:
+      linear-gradient(#fff,#fff),
+      linear-gradient(#fff,#fff),
+      red;
+    background-position:center;
+    background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+    border-radius: 100%;
+  }
+  
+  .minus {
+    display:inline-block;
+    /* margin-right: 20px; */
+    /* width:20px;
+    height:20px; */
+    padding: 11px;
+    background:
+      linear-gradient(#fff,#fff),
+      red;
+    background-position:center;
+    background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+    border-radius: 100%;
+  }

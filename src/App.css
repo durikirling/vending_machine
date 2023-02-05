@@ -11,21 +11,23 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover; */
   background-size: cover;
-  
- }
 
- ::-webkit-scrollbar {
+}
+
+::-webkit-scrollbar {
   width: 10px;
 }
-::-webkit-scrollbar-track{
+
+::-webkit-scrollbar-track {
   /* box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
   border-radius: 10px;
   background-color: hsl(225, 5%, 15%);
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 10px;
-  
+
 }
 
 .App {
@@ -36,118 +38,53 @@ body {
 
 .vending_machine {
   text-align: center;
+  /* отменяем возможность выделения текста */
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.allSoda {
-  /* background-image: url(https://steamuserimages-a.akamaihd.net/ugc/779604908382918163/B12F1FFF8F2C65D5C861FFFB6FBCBB81F23DA3D8/); */
-  /* background-image: url(https://catherineasquithgallery.com/uploads/posts/2021-02/1613704958_58-p-kosmicheskii-fon-dlya-prezentatsii-67.jpg); */
-  /* background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed; */
-  /* border: 3px solid white; */
-  position: absolute;
-  overflow: auto; 
-  padding: 10px;
-  width: 60%;
-  /* height: 400px; */
-  left: 5%;
-  top: 100px;
-  bottom: 10%;
-  background-color: hsl(220, 6%, 19%);
-  opacity: 90%;
-  transition-property: opacity;
-  transition-duration: 0.5s;
-  border-radius: 10px;
-  box-shadow: inset 0 0 50px 1px black;
-}
-
-
-.allSoda:hover {
-  opacity: 100%;
-}
-
-.soda {
-  border: 0px solid black;
-  width: 250px;
-  height: 250px;
-  cursor: pointer;
+.select-box {
+  font-size: large;
+  /* position: absolute; */
   margin: 10px;
   padding: 10px;
-  display: inline-block;
-  border-radius: 20px;
-  box-shadow: 0 0 10px 1px black;
-  background-color: rgb(10, 10, 10);
-  transition-property: background-color, opacity, width,height,margin,box-shadow;
-  transition-duration: 0.3s;
-  /* transition-property: width,height,margin;
-  transition-duration: 0.3s; */
-  vertical-align: middle;
-  position: relative;
-  
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.soda:hover{
-  /* width: 300px;
-  height: 300px; */
-  box-shadow: 0 0 10px 1px white;
-  width: 270px;
-    height: 268px;
-    margin: 0px;
-}
-
-.createSoda {
-  position: absolute;
-  font-size: 150px;
-  /* max-height: 250px; */
-  /* background-color: brown; */
-  /* top: 42.5%; */
-  top: calc(50% - 20px);
-  left: 50%;
-  /* margin-right: -50%; */
-  transform: translate(-50%, -50%);
+.select_box_default_value {
+  color: grey;
 }
 
 .purchase-count {
   position: relative;
   display: inline-block;
-  margin: 0px 10px;
+  margin: 0px 20px;
   background-color: red;
-  height: 20px;
-  width: 50px;
+  /* height: 20px; */
+  min-width: 50px;
   border-radius: 20px;
   line-height: 19px;
   text-align: center;
   vertical-align: middle;
   bottom: 6px;
+  padding: 1.5px 7px;
 }
 
-.plus {
-  display:inline-block;
-  margin: 0px 10px;
-  width:20px;
-  height:20px;
-  background:
-    linear-gradient(#fff,#fff),
-    linear-gradient(#fff,#fff),
-    red;
-  background-position:center;
-  background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
-  background-repeat:no-repeat;
-  border-radius: 100%;
-}
-
-.minus {
-  display:inline-block;
-  margin: 0px 10px;
-  width:20px;
-  height:20px;
-  background:
-    linear-gradient(#fff,#fff),
-    red;
-  background-position:center;
-  background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
-  background-repeat:no-repeat;
-  border-radius: 100%;
+.cart {
+  position: 'absolute';
+  width: 60px;
+  height: 60px;
+  top: 0;
+  right: 250;
+  cursor: pointer;
+  padding: 0;
+  /* background-image: url('../public/images/basket_icon.png'); */
 }
 
 /* @keyframes plusSize { 
@@ -158,12 +95,6 @@ body {
     opacity: 100%  
   }
 } */
-
-img{
-  padding: 10px;
-  height: 50%;
-  /* box-shadow: 0 0 15px red; */
-}
 
 .sum {
   position: absolute;
@@ -186,7 +117,7 @@ img{
   src: url('put_the_location_to_your_font.ttf or .otf');
  } */
 
- .change {
+.change {
   position: absolute;
   border: 3px solid white;
   width: 15%;
@@ -199,100 +130,13 @@ img{
   top: 905px;
   min-width: 140px;
   box-shadow: 0 0 10px 1px black;
-  transition-property: background-color,box-shadow;
+  transition-property: background-color, box-shadow;
   transition-duration: 0.3s;
- }
+}
 
- .change:hover{
+.change:hover {
   box-shadow: 0 0 5px 1px white;
   background-color: rgb(29, 29, 29);
-}
-
- .coins {
-  border: 3px solid black;
-  position: absolute;
-  overflow: auto; 
-  padding: 15px;
-  right: 7%;
-  top: 255px;
-  width: 15%;
-  min-width: 140px;
-  background-color: hsl(220, 6%, 19%);
-  box-shadow: 0 0 10px 1px black;
-  /* opacity: 95%; */
-  height: 590px;
-  box-shadow: inset 0 0 30px 1px black;
- }
-
- .coin {
-  /* border: 3px solid black; */
-  border-radius: 10px;
-  margin: 10px;
-  padding: 5px;
-  box-shadow: 0 0 10px 1px black;
-  /* width: 50%; */
-  margin-left: auto;
-  margin-right: auto;
-
- }
-
-
-
-.ruble {
-  width: 70px;
-  height: 70px;
-  border-radius: 100%;
-  background-color: yellow;
-  color: black;
-  font-size: 25px;
-  border: 3px solid black;
-  cursor: pointer;
-  margin: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px 1px black;
-  transition-property: box-shadow;
-  transition-duration: 0.15s;
-  position: relative;
-}
-
-.ruble:hover{
-  box-shadow: 0 0 10px 1px white;
-}
-
-.createCoin {
-  position: absolute;
-  font-size: 50px;
-  top: calc(50% - 5px);
-  /* top: calc(50% - 20px); */
-  left: 50%;
-  /* background-color: aqua; */
-  width: 70px;
-  height: 70px;
-  /* margin-right: -50%; */
-  transform: translate(-50%, -50%);
-}
-
-.coinProgress {
-  width: 80%;
-  height: 7px;
-  background-color: grey;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-
-  
-}
-
-.coinBar {
-  /* width: 10%; */
-  height: 7px;
-  /* background-color: green; */
-  text-align: center;
-  border-radius: 5px;
 }
 
 .login {
@@ -309,46 +153,56 @@ img{
 }
 
 .login:hover {
-  color:aqua;
+  color: aqua;
 }
 
-.modal {
+.modal-background {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
-  top: 0;
-  left: 0;
-  display: none;
+  /* top: 0;
+  left: 0; */
+  /* display: none; */
   align-items: center;
   justify-content: center;
   z-index: 0;
   color: black;
 }
 
-.modal-content {
+.modal {
   position: absolute;
-  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 12px;
   background-color: white;
-  /* height: 200px; */
-  width: 400px;
-  top: 40%;
-  left: 40%;
+  padding: 20px;
+  min-width: 300px;
+  /* min-height: 100px; */
+}
+
+.modal-content {
+  margin: 10px;
 }
 
 input {
   /* position: absolute; */
   /* margin: 15px; */
-  margin-top: 20px;
+  /* margin-top: 20px;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 10px; */
   /* left: 20% */
   /* top: 100px; */
+  margin: 10px;
+  width: 250px;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 6px;
 }
 
 button {
-  margin: 30px;
+  margin: 10px 40px 0 40px;
   padding: 10px;
   width: 90px;
   cursor: pointer;
@@ -356,13 +210,18 @@ button {
   position: relative;
 }
 
-.x {
+.x-btn {
   position: absolute;
-  padding: 5px;
-  top: 10px;
-  right: 20px;
+  font-size: 15px;
+  padding: 2px;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  /* border: 1px solid black; */
+  border: 1px solid grey;
+  border-radius: 3px;
+  color: grey;
 }
 
 .hint {
@@ -386,16 +245,19 @@ button {
     box-shadow: 8px 8px 8px -5px rgba(0, 0, 0, 0.0);
     color: rgba(255, 255, 255, 0.7);
   }
+
   50% {
     background: rgba(128, 128, 128, 0.3);
     box-shadow: 8px 8px 8px -5px rgba(0, 0, 0, 0.2);
     color: rgba(255, 255, 255, 0.7);
   }
+
   70% {
     background: rgba(128, 128, 128, 0.5);
     box-shadow: 8px 8px 8px -5px rgba(0, 0, 0, 0.4);
     color: rgba(255, 255, 255, 0.7);
   }
+
   100% {
     background: rgba(128, 128, 128, 0.8);
     box-shadow: 8px 8px 8px -5px rgba(0, 0, 0, 0.6);
@@ -403,7 +265,27 @@ button {
   }
 }
 
-.hint:hover::after{
+@keyframes spark {
+  0% {
+    /* background: rgba(128, 128, 128, 0.0); */
+    box-shadow: inset 0 0 20px 1px red;
+    /* color: rgba(255, 255, 255, 0.7); */
+  }
+
+  50% {
+    /* background: rgba(128, 128, 128, 0.3); */
+    box-shadow: inset 0 0 35px 1px red;
+    /* color: rgba(255, 255, 255, 0.7); */
+  }
+
+  100% {
+    /* background: rgba(128, 128, 128, 0.8); */
+    box-shadow: inset 0 0 20px 1px red;
+    /* color: rgba(255, 255, 255, 0.7); */
+  }
+}
+
+.hint:hover::after {
   content: attr(data-title);
   margin-left: 20px;
   /* margin-top: -10px; */
@@ -414,12 +296,15 @@ button {
   /* line-height: 40px; */
   /* left: 0%; */
   /* top: 120px; */
-  z-index: 1; /* Отображаем подсказку поверх других элементов */
+  z-index: 1;
+  /* Отображаем подсказку поверх других элементов */
   /* background: rgba(255, 255, 230, 0.7); /* Полупрозрачный цвет фона */
-  font-family: Arial, sans-serif; /* Гарнитура шрифта */
-  font-size: 15px; /* Размер текста подсказки */
+  font-family: Arial, sans-serif;
+  /* Гарнитура шрифта */
+  font-size: 15px;
+  /* Размер текста подсказки */
   /*padding: 1rem 1rem; /* Поля */
- 
+
   animation: shake 200ms ease-in-out forwards;
   /* box-shadow: 8px 8px 8px -5px rgba(0, 0, 0, 0.7); */
   border-radius: 2px;
@@ -429,4 +314,25 @@ button {
 
 /* .pursCount {
   position: absolute;
+} */
+
+/* #comment_bubble {
+  width: 140px;
+  height: 100px;
+  background: #088cb7;
+  position: relative;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
+
+#comment_bubble:before {
+  width: 0;
+  height: 0;
+  right: 100%;
+  top: 38px;
+  position: absolute;
+  border-top: 13px solid transparent;
+  border-right: 26px solid #088cb7;
+  border-bottom: 13px solid transparent;
 } */

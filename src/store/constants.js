@@ -2,7 +2,6 @@ export const SET_COINS = 'SET_COINS';
 export const ENTER_COIN = 'ENTER_COIN';
 
 export const SET_PRODUCTS = 'SET_PRODUCTS';
-// export const GET_PRODUCT = 'GET_PRODUCT';
 
 export const SET_SUM = 'SET_SUM';
 export const ADD_TO_SUM = 'ADD_TO_SUM';
@@ -17,3 +16,6 @@ export const SET_BASKET = 'SET_BASKET';
 export const ADD_TO_BASKET = 'ADD_TO_BASKET';
 export const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET';
 export const RESET_BASKET = 'RESET_BASKET';
+
+export const SET_PRODUCT_FILTER = 'SET_PRODUCT_FILTER';
+export const SET_COIN_FILTER = 'SET_COIN_FILTER';

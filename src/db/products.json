@@ -1,78 +1,86 @@
-
-
-[ 
-    {
-      "productName": "Coca-Cola",
-      "productImg": "/images/cola.png",
-      "productCount": 5,
-      "productPrice": 38
-    },
-    {
-        "productName": "Coca-Cola Zero",
-        "productImg": "/images/cola-zero.png",
-        "productCount": 4,
-        "productPrice": 30
-    },
-    {
-      "productName": "Coca-Cola Cherry",
-      "productImg": "/images/cola-cherry.png",
-      "productCount": 0,
-      "productPrice": 45
-    },
-    {
-      "productName": "Pepsi",
-      "productImg": "/images/pepsi.png",
-      "productCount": 2,
-      "productPrice": 35
-    },
-    {
-        "productName": "Pepsi Limited Edition",
-        "productImg": "/images/pepsi-limited.png",
-        "productCount": 1,
-        "productPrice": 99
-      },
-      {
-        "productName": "Sprite",
-        "productImg": "/images/sprite.png",
-        "productCount": 10,
-        "productPrice": 25
-      },
-      {
-        "productName": "Fanta Berry",
-        "productImg": "/images/fanta-berry.png",
-        "productCount": 10,
-        "productPrice": 25
-      },
-      {
-        "productName": "Fanta Cherry",
-        "productImg": "/images/fanta-cherry.png",
-        "productCount": 10,
-        "productPrice": 25
-      },
-      {
-        "productName": "Fanta Peach",
-        "productImg": "/images/fanta-peach.png",
-        "productCount": 10,
-        "productPrice": 25
-      },
-      {
-        "productName": "Fanta Grape",
-        "productImg": "/images/fanta-grape.png",
-        "productCount": 10,
-        "productPrice": 25
-      },
-      {
-        "productName": "Fanta Mango",
-        "productImg": "/images/fanta-mango.png",
-        "productCount": 10,
-        "productPrice": 25
-      },
-      {
-        "productName": "Fanta Pineapple",
-        "productImg": "/images/fanta-pineapple.png",
-        "productCount": 10,
-        "productPrice": 25
-      }
-  ]
-
-  
+[
+  {
+    "id": 1,
+    "productName": "Coca-Cola",
+    "productImg": "/images/cola.png",
+    "productCount": 5,
+    "productPrice": 38
+  },
+  {
+    "id": 2,
+    "productName": "Coca-Cola Zero",
+    "productImg": "/images/cola-zero.png",
+    "productCount": 4,
+    "productPrice": 30
+  },
+  {
+    "id": 3,
+    "productName": "Coca-Cola Cherry",
+    "productImg": "/images/cola-cherry.png",
+    "productCount": 0,
+    "productPrice": 45
+  },
+  {
+    "id": 4,
+    "productName": "Pepsi",
+    "productImg": "/images/pepsi.png",
+    "productCount": 2,
+    "productPrice": 35
+  },
+  {
+    "id": 5,
+    "productName": "Pepsi Limited Edition",
+    "productImg": "/images/pepsi-limited.png",
+    "productCount": 1,
+    "productPrice": 99
+  },
+  {
+    "id": 6,
+    "productName": "Sprite",
+    "productImg": "/images/sprite.png",
+    "productCount": 10,
+    "productPrice": 25
+  },
+  {
+    "id": 7,
+    "productName": "Fanta Berry",
+    "productImg": "/images/fanta-berry.png",
+    "productCount": 10,
+    "productPrice": 25
+  },
+  {
+    "id": 8,
+    "productName": "Fanta Cherry",
+    "productImg": "/images/fanta-cherry.png",
+    "productCount": 10,
+    "productPrice": 25
+  },
+  {
+    "id": 9,
+    "productName": "Fanta Peach",
+    "productImg": "/images/fanta-peach.png",
+    "productCount": 10,
+    "productPrice": 25
+  },
+  {
+    "id": 10,
+    "productName": "Fanta Grape",
+    "productImg": "/images/fanta-grape.png",
+    "productCount": 10,
+    "productPrice": 25
+  },
+  {
+    "id": 11,
+    "productName": "Fanta Mango",
+    "productImg": "/images/fanta-mango.png",
+    "productCount": 10,
+    "productPrice": 25
+  },
+  {
+    "id": 12,
+    "productName": "Fanta Pineapple",
+    "productImg": "/images/fanta-pineapple.png",
+    "productCount": 10,
+    "productPrice": 25
+  }
+]
