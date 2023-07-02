@@ -4,13 +4,13 @@
     "productName": "Coca-Cola",
     "productImg": "/images/cola.png",
     "productCount": 5,
-    "productPrice": 38
+    "productPrice": 1
   },
   {
     "id": 2,
     "productName": "Coca-Cola Zero",
     "productImg": "/images/cola-zero.png",
-    "productCount": 4,
+    "productCount": 10,
     "productPrice": 30
   },
   {
@@ -18,14 +18,14 @@
     "productName": "Coca-Cola Cherry",
     "productImg": "/images/cola-cherry.png",
     "productCount": 0,
-    "productPrice": 45
+    "productPrice": 10
   },
   {
     "id": 4,
     "productName": "Pepsi",
     "productImg": "/images/pepsi.png",
-    "productCount": 2,
-    "productPrice": 35
+    "productCount": 20,
+    "productPrice": 5
   },
   {
     "id": 5,

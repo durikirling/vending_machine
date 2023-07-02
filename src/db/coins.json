@@ -22,5 +22,35 @@
     "coinPar": 10,
     "coinCount": 8,
     "coinMaxCount": 10
+  },
+  {
+    "id": 5,
+    "coinPar": 50,
+    "coinCount": 8,
+    "coinMaxCount": 10
+  },
+  {
+    "id": 6,
+    "coinPar": 100,
+    "coinCount": 8,
+    "coinMaxCount": 10
+  },
+  {
+    "id": 7,
+    "coinPar": 100,
+    "coinCount": 8,
+    "coinMaxCount": 10
+  },
+  {
+    "id": 8,
+    "coinPar": 100,
+    "coinCount": 8,
+    "coinMaxCount": 10
+  },
+  {
+    "id": 9,
+    "coinPar": 100,
+    "coinCount": 8,
+    "coinMaxCount": 10
   }
 ]
