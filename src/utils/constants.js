@@ -1,4 +1,4 @@
-export const selectBoxProductSource = [
+export const SELECTBOX_PRODUCT_SOURCE = [
     {
       value: 'name_min',
       name: 'Название 🠕'
@@ -20,7 +20,7 @@ export const selectBoxProductSource = [
     }
   ]
 
-  export const selectBoxCoinSource = [
+  export const SELECTBOX_COIN_SOURCE = [
     {
       value: 'par_min',
       name: 'Номинал 🠕'
@@ -29,9 +29,14 @@ export const selectBoxProductSource = [
       name: 'Номинал 🠗'
     },{
       value: 'count_min',
-      name: 'Кол-во 🠕'
+      name: 'Количество 🠕'
     },{
       value: 'count_max',
-      name: 'Кол-во 🠗'
+      name: 'Количество 🠗'
     }
   ]
+
+  export const DATA_NAME = {
+    coins: 'coins',
+    products: 'products'
+  }

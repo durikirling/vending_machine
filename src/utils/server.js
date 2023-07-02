@@ -3,29 +3,10 @@ import axios from "axios";
 const ADMIN_SERVER_URL = "http://localhost:5000/admin/" // -> /trade or /admin -> function_name
 const SERVER_URL = "http://localhost:5000/trade/"
 
-export function getDBProducts(sortProperty=null) {
-  return axios.get(SERVER_URL + 'products/')//.then(result => {
-  //   result.data.sort((a, b) => {
-  //     switch (sortProperty) {
-  //       case 'name_min':
-  //         if (a.productName.toLowerCase() > b.productName.toLowerCase()) { return 1 }
-  //         else { return -1 }
-  //       case 'name_max':
-  //         if (a.productName.toLowerCase() < b.productName.toLowerCase()) { return 1 }
-  //         else { return -1 }
-  //       case 'price_min':
-  //         return a.productPrice - b.productPrice;
-  //       case 'price_max':
-  //         return b.productPrice - a.productPrice;
-  //       case 'count_min':
-  //         return a.productCount - b.productCount;
-  //       case 'count_max':
-  //         return b.productCount - a.productCount;
-  //       default:
-  //         return a.id - b.id;
-  //     }
-  //   })
-  // })
+// PRODUCTS
+
+export function getDBProducts() {
+  return axios.get(SERVER_URL + 'products/')
 }
 
 export function addProduct(newProduct) {
@@ -33,12 +14,14 @@ export function addProduct(newProduct) {
 }
 
 export function editProduct(editProduct) {
-  return axios.post(ADMIN_SERVER_URL + 'EditProduct', editProduct)
+  return axios.post(ADMIN_SERVER_URL + 'EditProduct', editProduct) // patch
 }
 
 export function deleteProduct(removeProductId) {
   return axios.delete(ADMIN_SERVER_URL + 'RemoveProduct?id=' + removeProductId)
 }
+
+// COINS
 
 export function getDBCoins() {
   return axios.get(SERVER_URL + 'money/')
@@ -49,7 +32,7 @@ export function addCoin(newCoin) {
 }
 
 export function editCoin(editCoin) {
-  return axios.post(ADMIN_SERVER_URL + 'EditCoin', editCoin)
+  return axios.post(ADMIN_SERVER_URL + 'EditCoin', editCoin) // patch
 }
 
 export function deleteCoin(removeCoinId) {

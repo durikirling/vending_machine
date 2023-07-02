@@ -1,4 +1,4 @@
-export function filterProducts(source = [], sortName) {
+export function sortingProducts(source = [], sortName) {
     return source.sort((a, b) => {
         switch (sortName) {
             case 'name_min':
@@ -21,7 +21,7 @@ export function filterProducts(source = [], sortName) {
     })
 }
 
-export function filterCoins(source = [], sortName) {
+export function sortingCoins(source = [], sortName) {
     return source.sort((a, b) => {
         switch (sortName) {
             case 'par_min':
@@ -36,4 +36,24 @@ export function filterCoins(source = [], sortName) {
                 return a.id - b.id;
         }
     })
+}
+
+export function addElementToDOM(container, rootId = 'portal') {
+
+    // const appendChild = (parent, child) => {
+    //     if (Array.isArray(child))
+    //       child.forEach(nestedChild => appendChild(parent, nestedChild));
+    //     else
+    //       parent.appendChild(child.nodeType ? child : document.createTextNode(child));
+    //   };
+
+    let root = document.getElementById(rootId)
+    if (!root) { // createAlterRoot
+        root = Object.assign(document.createElement('div'), { id: rootId })
+        root.appendChild(container)
+        document.body.appendChild(root)
+    } else {
+        root.appendChild(container)
+    }
+
 }
