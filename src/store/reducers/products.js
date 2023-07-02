@@ -7,7 +7,7 @@ const DEFAULT_PRODUCT = [
     {
         "id": 0,
         "productName": "...",
-        "productImg": "/images/default_can.png",
+        "productImg": "/images/default_can.png", // "/images/loader.gif"
         "productCount": "...",
         "productPrice": "..."
     }

@@ -4,7 +4,7 @@ import {
 
 const DEFAULT_FILTER = 'par_min'
 
-const coinFilterOperations = (state = DEFAULT_FILTER, action) => {
+const coinSortingOperations = (state = DEFAULT_FILTER, action) => {
     switch (action.type) {
         case SET_COIN_FILTER:
             return action.payload
@@ -13,4 +13,4 @@ const coinFilterOperations = (state = DEFAULT_FILTER, action) => {
     }
 }
 
-export default coinFilterOperations;
+export default coinSortingOperations;

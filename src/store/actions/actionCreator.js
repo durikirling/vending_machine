@@ -21,7 +21,7 @@ import * as Types from '../constants.js';
 
 // COINS
 
-export const setCoins = (coinsArr, sortProperty) => ({
+export const setCoins = (coinsArr) => ({
     type: Types.SET_COINS,
     payload: coinsArr//.sort((a, b) => {
     //     switch (sortProperty) {
@@ -114,12 +114,12 @@ export const resetBasket = () => ({
 
 // FILTER
 
-export const setProductFilter = (filterName) => ({
+export const setProductSorting = (sortingName) => ({
     type: Types.SET_PRODUCT_FILTER,
-    payload: filterName
+    payload: sortingName
 })
 
-export const setCoinFilter = (filterName) => ({
+export const setCoinSorting = (sortingName) => ({
     type: Types.SET_COIN_FILTER,
-    payload: filterName
+    payload: sortingName
 })

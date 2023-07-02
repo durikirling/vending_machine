@@ -4,7 +4,7 @@ import {
 
 const DEFAULT_FILTER = 'min_id'
 
-const productFilterOperations = (state = DEFAULT_FILTER, action) => {
+const productSortingOperations = (state = DEFAULT_FILTER, action) => {
     switch (action.type) {
         case SET_PRODUCT_FILTER:
             return action.payload
@@ -13,4 +13,4 @@ const productFilterOperations = (state = DEFAULT_FILTER, action) => {
     }
 }
 
-export default productFilterOperations;
+export default productSortingOperations;
