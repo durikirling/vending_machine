@@ -13,8 +13,8 @@
 //     ADD_TO_BASKET,
 //     REMOVE_FROM_BASKET,
 //     RESET_BASKET,
-//     SET_PRODUCT_FILTER,
-//     SET_COIN_FILTER
+//     SET_PRODUCT_SORTING,
+//     SET_COIN_SORTING
 // } from "../constants";
 
 import * as Types from '../constants.js';
@@ -115,11 +115,11 @@ export const resetBasket = () => ({
 // FILTER
 
 export const setProductSorting = (sortingName) => ({
-    type: Types.SET_PRODUCT_FILTER,
+    type: Types.SET_PRODUCT_SORTING,
     payload: sortingName
 })
 
 export const setCoinSorting = (sortingName) => ({
-    type: Types.SET_COIN_FILTER,
+    type: Types.SET_COIN_SORTING,
     payload: sortingName
 })
