@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './generic.css'
 
 class SelectBox extends Component {
     render() {
