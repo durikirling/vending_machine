@@ -18,9 +18,9 @@ class Input extends Component {
     // componentDidMount() {
     // }
 
-    // componentDidUpdate() {
-    //     // this.highlightChanges()
-    // }
+    componentDidUpdate() {
+        // this.highlightChanges()
+    }
 
     // highlightChanges = () => {
     //     const element = this.inputRef.current
@@ -36,23 +36,24 @@ class Input extends Component {
     // }
 
     handleChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         // if (this.props.type !== 'file') {
-            this.onInputText(e)
+        this.onInputText(e)
         // } else {
-            // this.onInputFile(e)
+        // this.onInputFile(e)
         // }
+        // this.props.rerenderParentCallback()
     }
 
     onInputText = (e) => {
-        this.setState({ currentValue: e.target.value })
+        this.setState({ currentValue: e.target.value }, ()=>this.props.rerenderParentCallback())
     }
 
     onInputFile = (e) => {
         // можно использовать в случае, если изображение находится в папке images данного проекта
         const image = "/images/" + e.target.files[0].name;
         // console.log(e.target.value, e.target.files[0])
-        this.setState({ currentValue: image, currentValueInFileInput: e.target.value});
+        this.setState({ currentValue: image, currentValueInFileInput: e.target.value });
 
         // можно использовать с изображениями, находящимися в любой директории ПК, но назваие будет очень большим
         // const reader = new FileReader();
@@ -66,19 +67,23 @@ class Input extends Component {
     render() {
         // const { id, style, label, name, placeholder, value, onChange, required, type, min, max, autoComplete, accept } = this.props
         // this.highlightChanges()
-        let inputClassName = this.state.currentValue !== this.state.initialValue ? "changable " : ""
-        inputClassName += this.props.style
+        let inputClassName = this.props.style
+        if (this.props.value) {
+            inputClassName += this.state.currentValue != this.state.initialValue ? " changable" : ""
+        }
+        // inputClassName += this.props.style
         return (
-            <div id="custom-input">
+            <div id="custom-input" className={inputClassName}>
                 {this.props.type === "file" ?
                     <div className='input-file'>
                         {this.props.alternativeFileInput &&
                             // <br/> &&
                             <input
                                 label='или'
-                                className={inputClassName}
+                                className={'alternative-file-input'}
                                 onChange={this.handleChange}
                                 value={this.state.currentValue}
+                                disabled
                             />
                         }
                         <input
@@ -95,7 +100,7 @@ class Input extends Component {
                         // ref={this.inputRef}
                         onChange={this.handleChange}
                         {...this.props}
-                        className={inputClassName}
+                        // className={inputClassName}
                         value={this.state.currentValue}
                     />
                 }
@@ -105,7 +110,8 @@ class Input extends Component {
                     onClick={() => {
                         // this.inputRef.current.value = this.state.initialValue
                         // this.highlightChanges()
-                        this.setState({ currentValue: this.state.initialValue, currentValueInFileInput: "" })
+                        this.setState({ currentValue: this.state.initialValue, currentValueInFileInput: "" }, ()=>this.props.rerenderParentCallback())
+                        // this.props.rerenderParentCallback()
                     }}
                 >&#10006;</div>
             </div>

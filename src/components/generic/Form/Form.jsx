@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 import '../generic.css'
 import FormTable from './FormTable';
+import Input from '../Input';
 
 class Form extends Component {
 
@@ -73,19 +74,24 @@ class Form extends Component {
         const inputFilter = ['input', 'textarea']
         const buttonFilter = ['button']
         // const otherFilter = inputFilter.concat(buttonFilter)
-        console.log(children[0])
-        console.log(children[1])
+        // console.log(children[0])
+        // console.log(children[1])
         const childrenEl = children?.length > 1 ? children : [children]
         const inputs = childrenEl.filter(child => inputFilter.includes(child?.type) || child?.type?.name === "Input")
         const buttons = childrenEl.filter(child => buttonFilter.includes(child?.type))
         const others = childrenEl.filter(child => otherFilter(child?.type, [inputFilter, buttonFilter]) && child?.type?.name !== "Input") // otherFilter(child?.type, [inputFilter, buttonFilter])
-        return {inputs, buttons, others}
+        return { inputs, buttons, others }
+    }
+
+    rerenderParentCallback = () => {
+        // console.log("input updated")
+        this.forceUpdate();
     }
 
     render() {
-        const {children, title, handleSubmit, onReset} = this.props
+        const { children, title, handleSubmit, onReset } = this.props
         if (children) {
-            const {inputs, buttons, others} = this.getFilteredChildren(children)
+            const { inputs, buttons, others } = this.getFilteredChildren(children)
             return (
                 <form
                     ref={this.formRef}
@@ -96,8 +102,15 @@ class Form extends Component {
                 >
                     <h1>{title}</h1>
                     <FormTable
+                        // rerenderParentCallback={this.rerenderParentCallback}
                     >
-                        {inputs}
+                        {inputs.map(inputComponent => {
+                            const cloned = React.cloneElement(inputComponent, {
+                                rerenderParentCallback: this.rerenderParentCallback,
+                                key: inputComponent.name
+                            })
+                            return cloned
+                        })}
                     </FormTable>
                     <div className='form-btns'>
                         {buttons}
