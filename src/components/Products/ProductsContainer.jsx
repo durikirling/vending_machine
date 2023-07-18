@@ -71,8 +71,8 @@ class ProductsContainer extends Component {
               key={item.id}
               source={item}
               isAdmin={this.props.isAdmin}
-              onClick={() => {
-                this.props.onClick(item)
+              onClick={(product, count) => {
+                this.props.onClick(product, count)
               }}
             // removeSoda={()=>this.props.removeSoda(item)}    
             />
