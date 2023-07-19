@@ -4,181 +4,116 @@ import { connect } from 'react-redux';
 import { getDBCoins, editCoin, addCoin, deleteCoin } from '../../utils/server';
 import { setCoins } from '../../store/actions/actionCreator';
 import { bindActionCreators } from 'redux';
-import FormTable from '../generic/FormTable';
+// import FormTable from '../generic/FormTable';
+import Form from '../generic/Form/Form';
 
 class CoinForm extends Component {
 
-
     state = {
-        coinId: '',
-        newCoinPar: '',
-        newCoinCount: '',
-        newCoinMaxCount: '',
-        editingMode: false,
-        buttons: <></>,
-        tableSource: []
+        id: this.props.source?.id ?? '',
+        coinPar: this.props.source?.coinPar ?? '',
+        coinCount: this.props.source?.coinCount ?? '',
+        coinMaxCount: this.props.source?.coinMaxCount ?? '',
+        editingMode: this.props.source ? true : false,
     }
 
     componentDidMount() {
-        const coin = this.props.source
+        // const coin = this.props.source
         // if (coin) {
         //     this.setState({
-        //         coinId: coin.id,
-        //         newCoinPar: coin.coinPar,
-        //         newCoinCount: coin.coinCount,
-        //         newCoinMaxCount: coin.coinMaxCount,
+        //         id: coin.id,
+        //         coinPar: coin.coinPar,
+        //         coinCount: coin.coinCount,
+        //         coinMaxCount: coin.coinMaxCount,
         //         editingMode: true
         //     })
         // }
-        if (coin) {
-            const buttons = <div>
-                <button onClick={this.submitForm}>Изменить</button>
-                <button onClick={this.deleteCoin}>Удалить</button>
-            </div>
-            this.setState({
-                coinId: coin.id,
-                newCoinPar: coin.coinPar,
-                newCoinCount: coin.coinCount,
-                newCoinMaxCount: coin.coinMaxCount,
-                editingMode: true,
-                buttons: buttons
-            }
-                , () => { this.setTableSource() }
-            )
-        } else {
-            const buttons = <>
-                <button onClick={this.submitForm}>Сохранить</button>
-                {/* <button onClick={() => { this.props.closeForm() }}>Отменить</button> */}
-            </>
-            this.setState({
-                buttons: buttons
-            }
-                , () => { this.setTableSource() }
-            )
-        }
-    }
-
-    setTableSource = () => {
-        const tableSource = [
-            {
-                name: 'Номинал',
-                inputComponent: <input
-                    name="newCoinPar"
-                    placeholder="Номинал"
-                    value={this.state.newCoinPar}
-                    onChange={this.handleInputChange}
-                />
-            },
-            {
-                name: 'Кол-во',
-                inputComponent: <input
-                    name="newCoinCount"
-                    placeholder="Текущее кол-во монет в автомате"
-                    value={this.state.newCoinCount}
-                    onChange={this.handleInputChange}
-                />
-            },
-            {
-                name: 'Макс. кол-во',
-                inputComponent: <input
-                    name="newCoinMaxCount"
-                    placeholder="Максимальное кол-во монет в автомате"
-                    value={this.state.newCoinMaxCount}
-                    onChange={this.handleInputChange}
-                />
-            },
-        ]
-        this.setState({ tableSource: tableSource })
     }
 
     handleInputChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        }
-            , () => { this.setTableSource() }
-        );
+        this.setState({ [event.target.name]: event.target.value });
     }
 
-    isCoinParUse = (newCoinPar) => {
-        return this.props.coins.some(coin => coin.coinPar === newCoinPar)
+    isCoinParUse = (coinPar) => {
+        return this.props.coins.some(coin => coin.coinPar === coinPar)
     }
 
-    isFormValid = (newCoinPar, newCoinCount, newCoinMaxCount) => {
-        if (newCoinPar > 0 && newCoinCount >= 0 && newCoinMaxCount >= 0) {
-            const numberValid = newCoinCount <= newCoinMaxCount
-            if (this.state.editingMode) {
-                return (!this.isCoinParUse(newCoinPar) || newCoinPar === this.props.coins.find(item => item.id === this.state.coinId).coinPar) && numberValid
-            } else {
-                return !this.isCoinParUse(newCoinPar) && numberValid
-            }
-        } else { return false }
-    }
+    // isFormValid = (coinPar, coinCount, coinMaxCount) => {
+    //     if (coinPar > 0 && coinCount >= 0 && coinMaxCount >= 0) {
+    //         const numberValid = coinCount <= coinMaxCount
+    //         if (this.state.editingMode) {
+    //             return (!this.isCoinParUse(coinPar) || coinPar === this.props.coins.find(item => item.id === this.state.id).coinPar) && numberValid
+    //         } else {
+    //             return !this.isCoinParUse(coinPar) && numberValid
+    //         }
+    //     } else { return false }
+    // }
 
-    transformValue = (number) => {
-        if (typeof (number) === 'string')
-            return Number(number.replace(/\s+/g, ''))
-        if (typeof (number) === 'number')
-            return number
-        return undefined
-    }
+    // transformValue = (number) => {
+    //     if (typeof (number) === 'string')
+    //         return Number(number.replace(/\s+/g, ''))
+    //     if (typeof (number) === 'number')
+    //         return number
+    //     return undefined
+    // }
 
-    submitForm = () => {
-        let newCoinPar = this.transformValue(this.state.newCoinPar)
-        let newCoinCount = this.transformValue(this.state.newCoinCount)
-        let newCoinMaxCount = this.transformValue(this.state.newCoinMaxCount)
-        if (this.isFormValid(newCoinPar, newCoinCount, newCoinMaxCount)) {
-            if (this.state.editingMode) {
-                const coin = {
-                    "id": this.state.coinId,
-                    "coinPar": newCoinPar,
-                    "coinCount": newCoinCount,
-                    "coinMaxCount": newCoinMaxCount
-                }
-                editCoin(coin)
-                    .then((res) => console.log(res))
-                    .catch((error) => console.log("SOMETHING WENT WRONG with EditCoin", error))
-                    .finally(() => {
-                        getDBCoins()
-                            .then(res => {
-                                this.props.setCoins(res.data, 'par_min')
-                            })
-                            .catch((error) => {
-                                console.log("SOMETHING WENT WRONG with Get-Request", error)
-                            })
-                        this.props.closeForm()
-                    })
-            } else {
-                const newCoin = {
-                    "coinPar": newCoinPar,
-                    "coinCount": newCoinCount,
-                    "coinMaxCount": newCoinMaxCount
-                }
-                addCoin(newCoin)
-                    .then((res) => console.log(res))
-                    .catch((error) => console.log("SOMETHING WENT WRONG with CreateCoin", error))
-                    .finally(() => {
-                        getDBCoins()
-                            .then(res => {
-                                this.props.setCoins(res.data, 'par_min') // .sort((a, b) => a.coinPar - b.coinPar)
-                            })
-                            .catch((error) => {
-                                console.log("SOMETHING WENT WRONG with Get-Request", error)
-                            })
-                        this.props.closeForm()
-                    })
-            }
-        } else { console.log('Validation form Error') }
-    }
+    // submitForm = () => {
+    //     let coinPar = this.transformValue(this.state.coinPar)
+    //     let coinCount = this.transformValue(this.state.coinCount)
+    //     let coinMaxCount = this.transformValue(this.state.coinMaxCount)
+    //     if (this.isFormValid(coinPar, coinCount, coinMaxCount)) {
+    //         if (this.state.editingMode) {
+    //             const coin = {
+    //                 "id": this.state.id,
+    //                 "coinPar": coinPar,
+    //                 "coinCount": coinCount,
+    //                 "coinMaxCount": coinMaxCount
+    //             }
+    //             editCoin(coin)
+    //                 .then((res) => console.log(res))
+    //                 .catch((error) => console.log("SOMETHING WENT WRONG with EditCoin", error))
+    //                 .finally(() => {
+    //                     getDBCoins()
+    //                         .then(res => {
+    //                             this.props.setCoins(res.data)
+    //                         })
+    //                         .catch((error) => {
+    //                             console.log("SOMETHING WENT WRONG with Get-Request", error)
+    //                         })
+    //                     this.props.closeForm()
+    //                 })
+    //         } else {
+    //             const newCoin = {
+    //                 "coinPar": coinPar,
+    //                 "coinCount": coinCount,
+    //                 "coinMaxCount": coinMaxCount
+    //             }
+    //             addCoin(newCoin)
+    //                 .then((res) => console.log(res))
+    //                 .catch((error) => console.log("SOMETHING WENT WRONG with CreateCoin", error))
+    //                 .finally(() => {
+    //                     getDBCoins()
+    //                         .then(res => {
+    //                             this.props.setCoins(res.data)
+    //                         })
+    //                         .catch((error) => {
+    //                             console.log("SOMETHING WENT WRONG with Get-Request", error)
+    //                         })
+    //                     this.props.closeForm()
+    //                 })
+    //         }
+    //     } else { console.log('Validation form Error') }
+    // }
 
     // submitCreateCoin = () => {
-    //     const newCoinPar = Number(this.state.newCoinPar)
-    //     const newCoinCount = Number(this.state.newCoinCount)
-    //     const newCoinMaxCount = Number(this.state.newCoinMaxCount)
-    //     if (this.isFormValid(newCoinPar, newCoinCount, newCoinMaxCount)) {
+    //     const coinPar = Number(this.state.coinPar)
+    //     const coinCount = Number(this.state.coinCount)
+    //     const coinMaxCount = Number(this.state.coinMaxCount)
+    //     if (this.isFormValid(coinPar, coinCount, coinMaxCount)) {
     //         let newCoin = { 
-    //             "coinPar": newCoinPar, 
-    //             "coinCount": newCoinCount, 
-    //             "coinMaxCount": newCoinMaxCount
+    //             "coinPar": coinPar, 
+    //             "coinCount": coinCount, 
+    //             "coinMaxCount": coinMaxCount
     //         }
     //         // let masCoin = this.props.coin.concat(newCoin)//.sort((a, b) => a.coinName - b.coinName)
     //         addCoin(newCoin)
@@ -199,15 +134,15 @@ class CoinForm extends Component {
     // }
 
     // submitEditCoin = () => {
-    //     const newCoinPar = Number(this.state.newCoinPar)
-    //     const newCoinCount = Number(this.state.newCoinCount)
-    //     const newCoinMaxCount = Number(this.state.newCoinMaxCount)
-    //     if (this.isFormValid(newCoinPar, newCoinCount, newCoinMaxCount)) {
+    //     const coinPar = Number(this.state.coinPar)
+    //     const coinCount = Number(this.state.coinCount)
+    //     const coinMaxCount = Number(this.state.coinMaxCount)
+    //     if (this.isFormValid(coinPar, coinCount, coinMaxCount)) {
     //         const coin = {
-    //             "id": this.state.coinId,
-    //             "coinPar": newCoinPar,
-    //             "coinCount": newCoinCount,
-    //             "coinMaxCount": newCoinMaxCount
+    //             "id": this.state.id,
+    //             "coinPar": coinPar,
+    //             "coinCount": coinCount,
+    //             "coinMaxCount": coinMaxCount
     //         }
     //         editCoin(coin)
     //             .then((res) => console.log(res))
@@ -228,16 +163,13 @@ class CoinForm extends Component {
     // }
 
     deleteCoin = () => {
-        deleteCoin(this.state.coinId)
+        deleteCoin(this.state.id)
             .then((res) => console.log(res))
             .catch((error) => console.log("SOMETHING WENT WRONG with EditCoin", error))
             .finally(() => {
                 getDBCoins()
                     .then(res => {
-                        // this.setState({
-                        //   coin: res.data//.sort((a, b) => a.coinName - b.coinName),
-                        // });
-                        this.props.setCoins(res.data, 'par_min')
+                        this.props.setCoins(res.data)
                     })
                     .catch((error) => {
                         console.log("SOMETHING WENT WRONG with Get-Request", error)
@@ -246,87 +178,136 @@ class CoinForm extends Component {
         this.props.closeForm()
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault()
+        // console.log(e.target.form)
+        // const form = new Form(e.target)
+        // console.log(form)
+        const formData = new FormData(e.target)
+        // console.log(Array.from(formData))
+
+        let coin = this.props.source ?? {}
+
+        for (let [name, value] of formData) {
+            // alert(`${name} = ${value}`); // key1=value1, потом key2=value2
+
+            coin[name] = Number(value) // .trim().replace(/ +(?= )/g, '')
+            // .trim() - убираем пробелы в начале и конце 
+            // .replace(/ +(?= )/g,'') - меняем множественные пробелы на один
+        }
+
+        console.log(coin)
+
+        // if (this.isProductNameUse(product)) {
+        //   notification({ text: 'name error', type: 'error' }, 3000)
+        //   return null
+        // }
+
+        if (this.state.editingMode) {
+            this.submitEdit(coin)
+        } else {
+            this.submitCreate(coin)
+        }
+
+    }
+
+    submitCreate = (coin) => {
+        addCoin(coin)
+            .then((res) => console.log(res))
+            .catch((error) => console.log("SOMETHING WENT WRONG with CreateProduct", error))
+            .finally(() => {
+                getDBCoins()
+                    .then(res => {
+                        this.props.setCoins(res.data)
+                    })
+                    .catch((error) => {
+                        console.log("SOMETHING WENT WRONG with Get-Request", error)
+                    })
+                this.props.closeForm()
+            })
+    }
+
+    submitEdit = (coin) => {
+        editCoin(coin)
+            .then((res) => console.log(res))
+            .catch((error) => console.log("SOMETHING WENT WRONG with EditProduct", error))
+            .finally(() => {
+                getDBCoins()
+                    .then(res => {
+                        this.props.setCoins(res.data)
+                    })
+                    .catch((error) => {
+                        console.log("SOMETHING WENT WRONG with Get-Request", error)
+                    })
+                this.props.closeForm()
+            })
+    }
+
+    // getFormButtons = () => {
+    //     const formButtons = [
+    //         { label: 'Удалить', onClick: (e) => this.deleteCoin() },
+    //         // { label: 'Удалить', onClick: (e) => this.deleteProduct() }
+    //     ]
+    //     return formButtons
+    // }
+
     render() {
-        const tableSource = [
-            {
-                name: 'Номинал',
-                inputComponent: <input
-                    name="newCoinPar"
-                    placeholder="Номинал"
-                    value={this.state.newCoinPar}
-                    onChange={this.handleInputChange}
-                />
-            },
-            {
-                name: 'Кол-во',
-                inputComponent: <input
-                    name="newCoinCount"
-                    placeholder="Текущее кол-во монет в автомате"
-                    value={this.state.newCoinCount}
-                    onChange={this.handleInputChange}
-                />
-            },
-            {
-                name: 'Макс. кол-во',
-                inputComponent: <input
-                    name="newCoinMaxCount"
-                    placeholder="Максимальное кол-во монет в автомате"
-                    value={this.state.newCoinMaxCount}
-                    onChange={this.handleInputChange}
-                />
-            },
-        ]
+        // const buttonsParams = this.state.editingMode ? this.getFormButtons() : null
+
         return (
-            <div>
-                <FormTable source={this.state.tableSource} />
-
-                {/* <form>
-                    <label htmlFor="choose">Would you prefer a banana or cherry?</label>
-                    <input id="choose" name="i_like" /><br />
-                    <label htmlFor="choose">Would or cherry?</label>
-                    <input id="choose" name="i_like" /><br />
-                    <label htmlFor="choose">Would</label>
-                    <input id="choose" name="i_like" /><br />
-                    <button>Submit</button>
-                </form> */}
-
-                {/* <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form> */}
-                
-                {/* Номинал
+            <Form
+                handleSubmit={this.handleSubmit}
+                // submitButtonLabel={this.state.editingMode ? 'Сохранить' : 'Создать'}
+                // anotherButtons={buttonsParams}
+                isHighlightChanges={this.state.editingMode}
+            // title='Заполните поля'
+            >
                 <input
-                    name="newCoinPar"
+                    label={'Номинал'}
+                    name="coinPar"
                     placeholder="Номинал"
-                    value={this.state.newCoinPar}
+                    value={this.state.coinPar}
                     onChange={this.handleInputChange}
-                >
-                </input><br />
-                Кол-во
+                    required={true}
+                    type='number'
+                    // pattern='^[0-9]+$'
+                    min={1}
+                    autoComplete="off"
+                // onInvalid={(e)=>{console.log(e)}}
+                />
                 <input
-                    name="newCoinCount"
+                    label={'Кол-во'}
+                    name="coinCount"
                     placeholder="Текущее кол-во монет в автомате"
-                    value={this.state.newCoinCount}
+                    value={this.state.coinCount}
                     onChange={this.handleInputChange}
-                >
-                </input><br />
-                Макс. кол-во
+                    required={true}
+                    type='number'
+                    max={this.state.coinMaxCount}
+                    min={0}
+                    autoComplete="off"
+                />
                 <input
-                    name="newCoinMaxCount"
+                    label={'Макс. кол-во'}
+                    name="coinMaxCount"
                     placeholder="Максимальное кол-во монет в автомате"
-                    value={this.state.newCoinMaxCount}
+                    value={this.state.coinMaxCount}
                     onChange={this.handleInputChange}
-                >
-                </input> */}
-                <br />
-                {/* <button onClick={this.submitCreateCoin}>Изменить</button>
-                    <button onClick={this.deleteCoin}>Удалить</button> */}
-                {this.state.buttons}
-            </div>
+                    type='number'
+                    required={true}
+                    min={0}
+                    autoComplete="off"
+                />
+                <button type='submit'>
+                    {this.state.editingMode ? 'Сохранить' : 'Создать'}
+                </button>
+                {this.state.editingMode ?
+                    <button onClick={(e) => this.deleteCoin()}>
+                        Удалить
+                    </button>
+                    : null
+                }
+            </Form>
         )
     };
 };
@@ -355,3 +336,48 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(CoinForm)
+
+    // setTableSource = () => {
+    //     const tableSource = [
+    //         {
+    //             name: 'Номинал',
+    //             inputComponent: <input
+    //                 name="coinPar"
+    //                 placeholder="Номинал"
+    //                 value={this.state.coinPar}
+    //                 onChange={this.handleInputChange}
+    //                 required={true}
+    //                 type='number'
+    //                 // pattern='^[0-9]+$'
+    //                 min={0}
+    //             // onInvalid={(e)=>{console.log(e)}}
+    //             />
+    //         },
+    //         {
+    //             name: 'Кол-во',
+    //             inputComponent: <input
+    //                 name="coinCount"
+    //                 placeholder="Текущее кол-во монет в автомате"
+    //                 value={this.state.coinCount}
+    //                 onChange={this.handleInputChange}
+    //                 required={true}
+    //                 type='number'
+    //                 max={this.state.coinMaxCount}
+    //                 min={0}
+    //             />
+    //         },
+    //         {
+    //             name: 'Макс. кол-во',
+    //             inputComponent: <input
+    //                 name="coinMaxCount"
+    //                 placeholder="Максимальное кол-во монет в автомате"
+    //                 value={this.state.coinMaxCount}
+    //                 onChange={this.handleInputChange}
+    //                 type='number'
+    //                 required={true}
+    //                 min={0}
+    //             />
+    //         },
+    //     ]
+    //     this.setState({ tableSource: tableSource })
+    // }

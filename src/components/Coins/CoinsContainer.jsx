@@ -4,36 +4,36 @@ import { connect } from 'react-redux';
 // import { setCoins, enterCoin, addToSum } from '../store/actions/actionCreator.js'
 // import { moveIndicatorCoin } from '../utils/moveIndicatorCoin'
 import CoinCard from './CoinCard.jsx';
-import { filterCoins } from '../../utils/functions.js';
+import { sortingCoins } from '../../utils/functions.js';
 import './Coin.css'
 
 
-class Coins extends Component {
+class CoinsContainer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            filteredCoins: []
+            sortedCoins: []
         };
     };
 
     componentDidMount = () => {
-        this.setState({ filteredCoins: filterCoins(this.props.coins, this.props.coinFilter) })
+        this.setState({ sortedCoins: sortingCoins(this.props.coins, this.props.coinSorting) })
     }
 
     componentDidUpdate = (prevState) => {
-        if (prevState.coinFilter !== this.props.coinFilter || prevState.coins !== this.props.coins)
-            this.setState({ filteredCoins: filterCoins(this.props.coins, this.props.coinFilter) })
+        if (prevState.coinSorting !== this.props.coinSorting || prevState.coins !== this.props.coins)
+            this.setState({ sortedCoins: sortingCoins(this.props.coins, this.props.coinSorting) })
     }
 
     render() {
         return (
             <div
-                id="coins"
-                className="coins"
+                // id="coins"
+                className="coins-container"
             >
                 {this.props.children}
-                {this.state.filteredCoins.map((item) => {
+                {this.state.sortedCoins.map((item) => {
                     // let coinOneOpacity = item.coinCount >= item.coinMaxCount ? { opacity: 0.2 } : {}
                     return (
                         <CoinCard
@@ -75,7 +75,7 @@ class Coins extends Component {
 function mapStateToProps(state) {
     return {
         coins: state.coins,
-        coinFilter: state.coinFilter
+        coinSorting: state.coinSorting
     }
 }
 
@@ -90,4 +90,4 @@ function mapStateToProps(state) {
 export default connect(
     mapStateToProps,
     // mapDispatchToProps
-)(Coins)
+)(CoinsContainer)

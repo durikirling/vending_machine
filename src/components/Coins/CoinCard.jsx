@@ -8,14 +8,15 @@ class CoinCard extends Component {
     };
 
     render() {
-        const source = this.props.source
-        const defaultProduct = source.coinPar === '...'
-        let coinBarWidth = 0, coinBarBC = '', coinOpacity = 1
-        if (source.coinCount > 0 && source.coinMaxCount > 0) {
-            const indicator = source.coinCount / source.coinMaxCount * 100
+        const {id, coinPar, coinCount, coinMaxCount} = this.props.source
+        const defaultProduct = coinPar === '...'
+        let coinBarWidth = 0, coinBarBC = '', coinClassName='coin'
+        if (defaultProduct) coinClassName += ' hint'
+        if (coinCount > 0 && coinMaxCount > 0) {
+            const indicator = coinCount / coinMaxCount * 100
                 coinBarWidth = indicator + "%"
                 if (indicator === 100) {
-                    coinOpacity = !this.props.isAdmin ? 0.2 : 1
+                    coinClassName+=' cant-give-coin'
                     coinBarBC = 'red'
                 } else if (indicator >= 80) {
                     coinBarBC = 'orange'
@@ -25,27 +26,27 @@ class CoinCard extends Component {
 
         return (
             <div
-                className="coin"
+                className="coin-container"
             >
                 <div
-                    className={defaultProduct ? 'ruble hint' : 'ruble'}
-                    style={{ opacity: coinOpacity }}
+                    className={coinClassName}
+                    // style={{ opacity: coinOpacity }}
                     onClick={() => this.props.onClick()}
                     data-title={defaultProduct ? 'При загрузке монет произошла ошибка. :(' : ''}
                 >
-                    {source.coinPar}₽
+                    {coinPar}₽
                 </div>
                 <div>
-                    {source.coinCount} из {source.coinMaxCount}
+                    {coinCount} из {coinMaxCount}
                 </div>
                 {/* {!this.props.isAdmin && */}
                 <div className="coinProgress">
                     <div
-                        id={`coinBar_${source.id}`}
+                        id={`coinBar_${id}`}
                         className="coinBar"
                         style={{ width: coinBarWidth, backgroundColor: coinBarBC }}
                     />
-                    {/* {source.coinCount/source.coinMaxCount*100}% */}
+                    {/* {coinCount/coinMaxCount*100}% */}
                 </div>
                 {/* } */}
             </div>
